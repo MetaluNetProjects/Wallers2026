@@ -20,7 +20,7 @@ DmxOutput port;
 
 int ledPeriod = 250;
 
-#define DMX_CHAN_COUNT 256
+#define DMX_CHAN_COUNT 300
 char dmxBuf0[DMX_CHAN_COUNT];
 char dmxBuf1[DMX_CHAN_COUNT];
 char *dmxBufs[2] = {dmxBuf0, dmxBuf1};
@@ -56,36 +56,28 @@ void setup() {
 
     Lamp::set_period_ms((DMX_CHAN_COUNT * 11) / 250);
 
-    // RGBA: 18 rampes: 0 - 17 (DMX 1 - 72)
+    // RGB: 30 parPixel: 0 - 29 (DMX 1 - 91)
     int chan = 1;
     int id = 0;
-    for(int i = 0; i < 18; i++) {
-        new LampFire(id++, chan, 4);
-        chan += 4;
+    for(int i = 0; i < 30; i++) {
+        new LampFire(id++, chan, 3);
+        chan += 3;
     }
 
-    chan = 80;
+    chan = 92;
     id = 30;
-    // 20 single: 30 - 49 (DMX 80 - 99)
+    // 20 single: 30 - 49 (DMX 92 - 101)
     for(int i = 0; i < 20; i++) {
         new LampFire(id++, chan, 1);
         chan += 1;
     }
 
-    chan = 120;
-    id = 80;
-    // RGBA: 10 parDMX: 80 - 89 (DMX 120 - 159)
-    for(int i = 0; i < 10; i++) {
+    chan = 106;
+    id = 60;
+    // RGBA: 30 RGBA: 60 - 89 (DMX 106 - 255)
+    for(int i = 0; i < 30; i++) {
         new LampFire(id++, chan, 4);
-        chan += 4;
-    }
-
-    chan = 180;
-    id = 100;
-    // RGB: 10 parPixel: 100 - 109 (DMX 180 - 209)
-    for(int i = 0; i < 10; i++) {
-        new LampFire(id++, chan, 3);
-        chan += 3;
+        chan += 5;
     }
 
     fill_frame();

@@ -1,0 +1,106 @@
+{
+  "version": [1, 0],
+  "unpartitioned": {
+    "families": ["absolute"],
+    "permissions": {
+      "secure": "rw",
+      "nonsecure": "rw",
+      "bootloader": "rw"
+    }
+  },
+  "partitions": [
+    {
+      "name": "Main A",
+      "id": 0,
+      "size": "1200K",
+      "families": ["rp2350-arm-s", "rp2350-riscv"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      }
+    },
+    {
+      "name": "Main B",
+      "id": 1,
+      "size": "1200K",
+      "families": ["rp2350-arm-s", "rp2350-riscv"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "link": ["a", 0]
+    },
+    {
+      "name": "Firmware A",
+      "id": "0x776966696669726d",
+      "start": "2400K",
+      "size": "256K",
+      "families": ["cyw43-firmware"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "ignored_during_riscv_boot": true,
+      "no_reboot_on_uf2_download": true
+    },
+    {
+      "name": "Firmware B",
+      "id": 12345,
+      "size": "256K",
+      "families": ["cyw43-firmware"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "link": ["a", 2],
+      "ignored_during_riscv_boot": true,
+      "no_reboot_on_uf2_download": true
+    },
+    {
+      "name": "Tables",
+      "id": 321,
+      "start": "2912k",
+      "size": "200k",
+      "families": ["data"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "ignored_during_riscv_boot": true,
+      "no_reboot_on_uf2_download": true
+    },
+    {
+      "name": "HTML",
+      "id": 321,
+      "start": "3912k",
+      "size": "100k",
+      "families": ["data"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "ignored_during_riscv_boot": true,
+      "no_reboot_on_uf2_download": true
+    },
+    {
+      "name": "WIFI",
+      "id": 500,
+      "start": "4016k",
+      "size": "4k",
+      "families": ["data"],
+      "permissions": {
+        "secure": "rw",
+        "nonsecure": "rw",
+        "bootloader": "rw"
+      },
+      "ignored_during_riscv_boot": true,
+      "no_reboot_on_uf2_download": true
+    }
+  ]
+}

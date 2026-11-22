@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+    const sock = new WebSocket(`ws://${window.location.hostname}/`);
+    sock.onopen = () => {
+        console.log('onopen');
+        sock.send("Hi from client!");
+        //const volume = document.getElementById("volume");
+        var volume = document.querySelector("#volume");
+        volume.addEventListener("input", (event) => {
+            sock.send(`volume ${event.target.value}`);
+            console.log(`volume ${event.target.value}`);
+        });
+        document.getElementById("run").oninput = function() {
+            //var s = "f 100 10 0 " + (this.checked ? "0" : "4") + " 16 0"; // start transition
+            var s = "f 100 20 " + (this.checked ? "1" : "0"); // call preset
+            sock.send(s);
+            console.log(s);
+        }
+    };
+    sock.onclose = () => {
+      console.log('onclose');
+    };
+    sock.onmessage = (msg) => {
+      //console.log('onmessage', msg);
+      var f = document.getElementById("chatbox").contentDocument;
+      var text = "<b>Message: <em>" + msg.data + "</em> </b><br>";
+      f.write(text);
+      document.getElementById("chatbox").contentWindow.scrollByPages(1);
+    };
+
+    console.log('connecting');
+  </script>
+</head>
+<body>
+    <h1>--- Wifi-DMX control page ---</h1>
+    <h2>Controls &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" class="switch" id="run" value="RUN"/>
+        <label for="run">Run sequence</label>
+    </h2>
+    <iframe width="100%" height="200px" id="chatbox""></iframe>
+    <div>
+        <input type="range" id="volume" name="volume" min="0" max="255" />
+        <label for="volume">Volume</label>
+    </div>
+</body>
+</html>

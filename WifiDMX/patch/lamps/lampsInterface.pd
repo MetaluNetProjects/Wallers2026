@@ -246,7 +246,6 @@
 #X connect 71 0 67 0;
 #X connect 71 1 62 0;
 #X connect 72 0 61 0;
-#X connect 72 0 73 0;
 #X connect 75 0 72 1;
 #X restore 115 67 pd lamps_settings_interface;
 #X msg 214 202 90 \$1;

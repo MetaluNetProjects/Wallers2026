@@ -252,6 +252,7 @@
 #X obj 750 128 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X msg 914 149 preset 0 10000 0 0 0 0 0;
 #X msg 985 115 preset 1 10000 1 1 1 1 1;
+#X obj 914 63 loadbang;
 #X connect 1 0 2 0;
 #X connect 1 1 4 0;
 #X connect 3 0 36 0;
@@ -276,3 +277,5 @@
 #X connect 41 0 33 0;
 #X connect 42 0 40 0;
 #X connect 43 0 40 0;
+#X connect 44 0 42 0;
+#X connect 44 0 43 0;
